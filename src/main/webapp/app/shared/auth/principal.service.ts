@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import { AccountService } from './account.service';
-import { JhiTrackerService } from '../tracker/tracker.service'; // Barrel doesn't work here. No idea why!
+import {Injectable} from "@angular/core";
+import {Observable} from "rxjs/Observable";
+import {Subject} from "rxjs/Subject";
+import {AccountService} from "./account.service";
+import {JhiTrackerService} from "../tracker/tracker.service"; // Barrel doesn't work here. No idea why!
 
 @Injectable()
 export class Principal {
@@ -10,18 +10,17 @@ export class Principal {
     private authenticated = false;
     private authenticationState = new Subject<any>();
 
-    constructor(
-        private account: AccountService,
-        private trackerService: JhiTrackerService
-    ) {}
+    constructor(private account: AccountService,
+                private trackerService: JhiTrackerService) {
+    }
 
-    authenticate (identity) {
+    authenticate(identity) {
         this.userIdentity = identity;
         this.authenticated = identity !== null;
         this.authenticationState.next(this.userIdentity);
     }
 
-    hasAnyAuthority (authorities: string[]): Promise<boolean> {
+    hasAnyAuthority(authorities: string[]): Promise<boolean> {
         if (!this.authenticated || !this.userIdentity || !this.userIdentity.authorities) {
             return Promise.resolve(false);
         }
@@ -35,9 +34,9 @@ export class Principal {
         return Promise.resolve(false);
     }
 
-    hasAuthority (authority: string): Promise<boolean> {
+    hasAuthority(authority: string): Promise<boolean> {
         if (!this.authenticated) {
-           return Promise.resolve(false);
+            return Promise.resolve(false);
         }
 
         return this.identity().then(id => {
@@ -47,7 +46,7 @@ export class Principal {
         });
     }
 
-    identity (force?: boolean): Promise<any> {
+    identity(force?: boolean): Promise<any> {
         if (force === true) {
             this.userIdentity = undefined;
         }
@@ -81,11 +80,11 @@ export class Principal {
         });
     }
 
-    isAuthenticated (): boolean {
+    isAuthenticated(): boolean {
         return this.authenticated;
     }
 
-    isIdentityResolved (): boolean {
+    isIdentityResolved(): boolean {
         return this.userIdentity !== undefined;
     }
 
@@ -94,6 +93,6 @@ export class Principal {
     }
 
     getImageUrl(): String {
-        return this.isIdentityResolved () ? this.userIdentity.imageUrl : null;
+        return this.isIdentityResolved() ? this.userIdentity.imageUrl : null;
     }
 }

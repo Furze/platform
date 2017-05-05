@@ -1,16 +1,15 @@
 package nz.referable.service;
 
+import nz.referable.config.Constants;
 import nz.referable.domain.Authority;
 import nz.referable.domain.User;
 import nz.referable.repository.AuthorityRepository;
-import nz.referable.config.Constants;
 import nz.referable.repository.UserRepository;
 import nz.referable.repository.search.UserSearchRepository;
 import nz.referable.security.AuthoritiesConstants;
 import nz.referable.security.SecurityUtils;
-import nz.referable.service.util.RandomUtil;
 import nz.referable.service.dto.UserDTO;
-
+import nz.referable.service.util.RandomUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -31,14 +30,10 @@ import java.util.*;
 @Transactional
 public class UserService {
 
-    private final Logger log = LoggerFactory.getLogger(UserService.class);
-
-    private final UserRepository userRepository;
-
-    private final PasswordEncoder passwordEncoder;
-
     public final JdbcTokenStore jdbcTokenStore;
-
+    private final Logger log = LoggerFactory.getLogger(UserService.class);
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
     private final UserSearchRepository userSearchRepository;
 
     private final AuthorityRepository authorityRepository;
@@ -65,19 +60,19 @@ public class UserService {
     }
 
     public Optional<User> completePasswordReset(String newPassword, String key) {
-       log.debug("Reset user password for reset key {}", key);
+        log.debug("Reset user password for reset key {}", key);
 
-       return userRepository.findOneByResetKey(key)
+        return userRepository.findOneByResetKey(key)
             .filter(user -> {
                 ZonedDateTime oneDayAgo = ZonedDateTime.now().minusHours(24);
                 return user.getResetDate().isAfter(oneDayAgo);
-           })
-           .map(user -> {
+            })
+            .map(user -> {
                 user.setPassword(passwordEncoder.encode(newPassword));
                 user.setResetKey(null);
                 user.setResetDate(null);
                 return user;
-           });
+            });
     }
 
     public Optional<User> requestPasswordReset(String mail) {
@@ -91,7 +86,7 @@ public class UserService {
     }
 
     public User createUser(String login, String password, String firstName, String lastName, String email,
-        String imageUrl, String langKey) {
+                           String imageUrl, String langKey) {
 
         User newUser = new User();
         Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
@@ -151,10 +146,10 @@ public class UserService {
      * Update basic information (first name, last name, email, language) for the current user.
      *
      * @param firstName first name of user
-     * @param lastName last name of user
-     * @param email email id of user
-     * @param langKey language key
-     * @param imageUrl image URL of user
+     * @param lastName  last name of user
+     * @param email     email id of user
+     * @param langKey   language key
+     * @param imageUrl  image URL of user
      */
     public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl) {
         userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(user -> {

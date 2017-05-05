@@ -1,12 +1,12 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { Observable } from 'rxjs/Rx';
-import { ReferableTestModule } from '../../../test.module';
-import { Principal, AccountService } from '../../../../../../main/webapp/app/shared';
-import { SettingsComponent } from '../../../../../../main/webapp/app/account/settings/settings.component';
-import { MockAccountService } from '../../../helpers/mock-account.service';
-import { MockPrincipal } from '../../../helpers/mock-principal.service';
-import { JhiTrackerService } from '../../../../../../main/webapp/app/shared/tracker/tracker.service';
-import { MockTrackerService } from '../../../helpers/mock-tracker.service';
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
+import {Observable} from "rxjs/Rx";
+import {ReferableTestModule} from "../../../test.module";
+import {AccountService, Principal} from "../../../../../../main/webapp/app/shared";
+import {SettingsComponent} from "../../../../../../main/webapp/app/account/settings/settings.component";
+import {MockAccountService} from "../../../helpers/mock-account.service";
+import {MockPrincipal} from "../../../helpers/mock-principal.service";
+import {JhiTrackerService} from "../../../../../../main/webapp/app/shared/tracker/tracker.service";
+import {MockTrackerService} from "../../../helpers/mock-tracker.service";
 
 
 describe('Component Tests', () => {

@@ -1,20 +1,20 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from "@angular/core";
 
-import { Principal } from '../auth/principal.service';
-import { AuthServerProvider } from '../auth/auth-oauth2.service';
-import { JhiTrackerService } from '../tracker/tracker.service';
+import {Principal} from "../auth/principal.service";
+import {AuthServerProvider} from "../auth/auth-oauth2.service";
+import {JhiTrackerService} from "../tracker/tracker.service";
 
 @Injectable()
 export class LoginService {
 
-    constructor (
-        private principal: Principal,
-        private trackerService: JhiTrackerService,
-        private authServerProvider: AuthServerProvider
-    ) {}
+    constructor(private principal: Principal,
+                private trackerService: JhiTrackerService,
+                private authServerProvider: AuthServerProvider) {
+    }
 
-    login (credentials, callback?) {
-        let cb = callback || function() {};
+    login(credentials, callback?) {
+        let cb = callback || function () {
+            };
 
         return new Promise((resolve, reject) => {
             this.authServerProvider.login(credentials).subscribe(data => {
@@ -31,7 +31,7 @@ export class LoginService {
         });
     }
 
-    logout () {
+    logout() {
         this.authServerProvider.logout().subscribe();
         this.principal.authenticate(null);
     }

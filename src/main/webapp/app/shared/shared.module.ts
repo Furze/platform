@@ -1,23 +1,23 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from "@angular/core";
+import {DatePipe} from "@angular/common";
 
-import { CookieService } from 'angular2-cookie/services/cookies.service';
+import {CookieService} from "angular2-cookie/services/cookies.service";
 import {
-    ReferableSharedLibsModule,
-    ReferableSharedCommonModule,
-    CSRFService,
-    AuthService,
-    AuthServerProvider,
     AccountService,
-    UserService,
-    StateStorageService,
-    LoginService,
-    LoginModalService,
-    Principal,
-    JhiTrackerService,
+    AuthServerProvider,
+    AuthService,
+    CSRFService,
     HasAnyAuthorityDirective,
-    JhiLoginModalComponent
-} from './';
+    JhiLoginModalComponent,
+    JhiTrackerService,
+    LoginModalService,
+    LoginService,
+    Principal,
+    ReferableSharedCommonModule,
+    ReferableSharedLibsModule,
+    StateStorageService,
+    UserService
+} from "./";
 
 @NgModule({
     imports: [
@@ -52,4 +52,5 @@ import {
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
 })
-export class ReferableSharedModule {}
+export class ReferableSharedModule {
+}

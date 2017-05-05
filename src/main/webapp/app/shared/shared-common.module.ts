@@ -1,15 +1,11 @@
-import { NgModule, Sanitizer } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import {NgModule, Sanitizer} from "@angular/core";
+import {Title} from "@angular/platform-browser";
 
-import { AlertService } from 'ng-jhipster';
+import {AlertService} from "ng-jhipster";
 
-import { WindowRef } from './tracker/window.service';
+import {WindowRef} from "./tracker/window.service";
 
-import {
-    ReferableSharedLibsModule,
-    JhiAlertComponent,
-    JhiAlertErrorComponent
-} from './';
+import {JhiAlertComponent, JhiAlertErrorComponent, ReferableSharedLibsModule} from "./";
 
 
 export function alertServiceProvider(sanitizer: Sanitizer) {
@@ -41,4 +37,5 @@ export function alertServiceProvider(sanitizer: Sanitizer) {
         JhiAlertErrorComponent
     ]
 })
-export class ReferableSharedCommonModule {}
+export class ReferableSharedCommonModule {
+}

@@ -1,34 +1,33 @@
-import './vendor.ts';
+import "./vendor.ts";
 
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { Ng2Webstorage } from 'ng2-webstorage';
+import {NgModule} from "@angular/core";
+import {BrowserModule} from "@angular/platform-browser";
+import {Ng2Webstorage} from "ng2-webstorage";
 
-import { ReferableSharedModule, UserRouteAccessService } from './shared';
-import { ReferableHomeModule } from './home/home.module';
-import { ReferableAdminModule } from './admin/admin.module';
-import { ReferableAccountModule } from './account/account.module';
-import { ReferableEntityModule } from './entities/entity.module';
-
-import { LayoutRoutingModule } from './layouts';
-import { customHttpProvider } from './blocks/interceptor/http.provider';
-import { PaginationConfig } from './blocks/config/uib-pagination.config';
+import {ReferableSharedModule, UserRouteAccessService} from "./shared";
+import {ReferableHomeModule} from "./home/home.module";
+import {ReferableAdminModule} from "./admin/admin.module";
+import {ReferableAccountModule} from "./account/account.module";
+import {ReferableEntityModule} from "./entities/entity.module";
 
 import {
-    JhiMainComponent,
-    NavbarComponent,
+    ErrorComponent,
     FooterComponent,
-    ProfileService,
+    JhiMainComponent,
+    LayoutRoutingModule,
+    NavbarComponent,
     PageRibbonComponent,
-    ErrorComponent
-} from './layouts';
+    ProfileService
+} from "./layouts";
+import {customHttpProvider} from "./blocks/interceptor/http.provider";
+import {PaginationConfig} from "./blocks/config/uib-pagination.config";
 
 
 @NgModule({
     imports: [
         BrowserModule,
         LayoutRoutingModule,
-        Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-'}),
+        Ng2Webstorage.forRoot({prefix: 'jhi', separator: '-'}),
         ReferableSharedModule,
         ReferableHomeModule,
         ReferableAdminModule,
@@ -48,6 +47,7 @@ import {
         PaginationConfig,
         UserRouteAccessService
     ],
-    bootstrap: [ JhiMainComponent ]
+    bootstrap: [JhiMainComponent]
 })
-export class ReferableAppModule {}
+export class ReferableAppModule {
+}

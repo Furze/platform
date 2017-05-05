@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 
 @Component({
     selector: 'jhi-error',
@@ -8,9 +8,8 @@ export class ErrorComponent implements OnInit {
     errorMessage: string;
     error403: boolean;
 
-    constructor(
-        ) {
-        }
+    constructor() {
+    }
 
     ngOnInit() {
     }

@@ -1,13 +1,10 @@
-import { Route } from '@angular/router';
-
-import { UserRouteAccessService } from '../../shared';
-import { JhiTrackerComponent } from './tracker.component';
-import { JhiTrackerService, Principal } from '../../shared';
+import {Route} from "@angular/router";
+import {JhiTrackerComponent} from "./tracker.component";
 
 export const trackerRoute: Route = {
-  path: 'jhi-tracker',
-  component: JhiTrackerComponent,
-  data: {
-    pageTitle: 'Real-time user activities'
-  }
+    path: 'jhi-tracker',
+    component: JhiTrackerComponent,
+    data: {
+        pageTitle: 'Real-time user activities'
+    }
 };

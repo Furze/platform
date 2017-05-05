@@ -1,13 +1,13 @@
-import { Injectable, Inject } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { Observable, Observer, Subscription } from 'rxjs/Rx';
+import {Injectable} from "@angular/core";
+import {NavigationEnd, Router} from "@angular/router";
+import {Observable, Observer, Subscription} from "rxjs/Rx";
 
-import { CSRFService } from '../auth/csrf.service';
-import { WindowRef } from './window.service';
-import { AuthServerProvider } from '../auth/auth-oauth2.service';
+import {CSRFService} from "../auth/csrf.service";
+import {WindowRef} from "./window.service";
+import {AuthServerProvider} from "../auth/auth-oauth2.service";
 
-import * as SockJS from 'sockjs-client';
-import * as Stomp from 'webstomp-client';
+import * as SockJS from "sockjs-client";
+import * as Stomp from "webstomp-client";
 
 @Injectable()
 export class JhiTrackerService {
@@ -20,19 +20,17 @@ export class JhiTrackerService {
     alreadyConnectedOnce = false;
     private subscription: Subscription;
 
-    constructor(
-        private router: Router,
-        private authServerProvider: AuthServerProvider,
-        private $window: WindowRef,
-        private csrfService: CSRFService
-    ) {
+    constructor(private router: Router,
+                private authServerProvider: AuthServerProvider,
+                private $window: WindowRef,
+                private csrfService: CSRFService) {
         this.connection = this.createConnection();
         this.listener = this.createListener();
     }
 
-    connect () {
+    connect() {
         if (this.connectedPromise === null) {
-          this.connection = this.createConnection();
+            this.connection = this.createConnection();
         }
         // building absolute path so that websocket doesn't fail when deploying with a context path
         const loc = this.$window.nativeWindow.location;
@@ -50,16 +48,16 @@ export class JhiTrackerService {
             this.sendActivity();
             if (!this.alreadyConnectedOnce) {
                 this.subscription = this.router.events.subscribe((event) => {
-                  if (event instanceof NavigationEnd) {
-                    this.sendActivity();
-                  }
+                    if (event instanceof NavigationEnd) {
+                        this.sendActivity();
+                    }
                 });
                 this.alreadyConnectedOnce = true;
             }
         });
     }
 
-    disconnect () {
+    disconnect() {
         if (this.stompClient !== null) {
             this.stompClient.disconnect();
             this.stompClient = null;
@@ -71,7 +69,7 @@ export class JhiTrackerService {
         this.alreadyConnectedOnce = false;
     }
 
-    receive () {
+    receive() {
         return this.listener;
     }
 
@@ -85,7 +83,7 @@ export class JhiTrackerService {
         }
     }
 
-    subscribe () {
+    subscribe() {
         this.connection.then(() => {
             this.subscriber = this.stompClient.subscribe('/topic/tracker', data => {
                 this.listenerObserver.next(JSON.parse(data.body));
@@ -93,7 +91,7 @@ export class JhiTrackerService {
         });
     }
 
-    unsubscribe () {
+    unsubscribe() {
         if (this.subscriber !== null) {
             this.subscriber.unsubscribe();
         }

@@ -1,12 +1,12 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { Observable } from 'rxjs/Rx';
-import { ReferableTestModule } from '../../../test.module';
-import { PasswordComponent } from '../../../../../../main/webapp/app/account/password/password.component';
-import { Password } from '../../../../../../main/webapp/app/account/password/password.service';
-import { Principal } from '../../../../../../main/webapp/app/shared/auth/principal.service';
-import { AccountService } from '../../../../../../main/webapp/app/shared/auth/account.service';
-import { JhiTrackerService } from '../../../../../../main/webapp/app/shared/tracker/tracker.service';
-import { MockTrackerService } from '../../../helpers/mock-tracker.service';
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
+import {Observable} from "rxjs/Rx";
+import {ReferableTestModule} from "../../../test.module";
+import {PasswordComponent} from "../../../../../../main/webapp/app/account/password/password.component";
+import {Password} from "../../../../../../main/webapp/app/account/password/password.service";
+import {Principal} from "../../../../../../main/webapp/app/shared/auth/principal.service";
+import {AccountService} from "../../../../../../main/webapp/app/shared/auth/account.service";
+import {JhiTrackerService} from "../../../../../../main/webapp/app/shared/tracker/tracker.service";
+import {MockTrackerService} from "../../../helpers/mock-tracker.service";
 
 
 describe('Component Tests', () => {
@@ -67,7 +67,7 @@ describe('Component Tests', () => {
             expect(service.save).toHaveBeenCalledWith('myPassword');
         });
 
-        it('should set success to OK upon success', function() {
+        it('should set success to OK upon success', function () {
             // GIVEN
             spyOn(service, 'save').and.returnValue(Observable.of(true));
             comp.password = comp.confirmPassword = 'myPassword';
@@ -81,7 +81,7 @@ describe('Component Tests', () => {
             expect(comp.success).toBe('OK');
         });
 
-        it('should notify of error if change password fails', function() {
+        it('should notify of error if change password fails', function () {
             // GIVEN
             spyOn(service, 'save').and.returnValue(Observable.throw('ERROR'));
             comp.password = comp.confirmPassword = 'myPassword';

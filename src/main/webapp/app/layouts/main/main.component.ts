@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRouteSnapshot, NavigationEnd, RoutesRecognized } from '@angular/router';
+import {Component, OnInit} from "@angular/core";
+import {ActivatedRouteSnapshot, NavigationEnd, Router} from "@angular/router";
 
-import { Title } from '@angular/platform-browser';
-import { StateStorageService } from '../../shared';
+import {Title} from "@angular/platform-browser";
+import {StateStorageService} from "../../shared";
 
 @Component({
     selector: 'jhi-main',
@@ -10,11 +10,10 @@ import { StateStorageService } from '../../shared';
 })
 export class JhiMainComponent implements OnInit {
 
-    constructor(
-        private titleService: Title,
-        private router: Router,
-        private $storageService: StateStorageService,
-    ) {}
+    constructor(private titleService: Title,
+                private router: Router,
+                private $storageService: StateStorageService,) {
+    }
 
     private getPageTitle(routeSnapshot: ActivatedRouteSnapshot) {
         let title: string = (routeSnapshot.data && routeSnapshot.data['pageTitle']) ? routeSnapshot.data['pageTitle'] : 'referableApp';
@@ -27,7 +26,7 @@ export class JhiMainComponent implements OnInit {
     ngOnInit() {
         this.router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
-                 this.titleService.setTitle(this.getPageTitle(this.router.routerState.snapshot.root));
+                this.titleService.setTitle(this.getPageTitle(this.router.routerState.snapshot.root));
             }
         });
     }

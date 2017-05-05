@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ReferableTestModule } from '../../../test.module';
-import { JhiHealthCheckComponent } from '../../../../../../main/webapp/app/admin/health/health.component';
-import { JhiHealthService } from '../../../../../../main/webapp/app/admin/health/health.service';
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {ReferableTestModule} from "../../../test.module";
+import {JhiHealthCheckComponent} from "../../../../../../main/webapp/app/admin/health/health.component";
+import {JhiHealthService} from "../../../../../../main/webapp/app/admin/health/health.service";
 
 
 describe('Component Tests', () => {
@@ -25,12 +25,12 @@ describe('Component Tests', () => {
                     }
                 ]
             })
-            .overrideComponent(JhiHealthCheckComponent, {
-                set: {
-                    template: ''
-                }
-            })
-            .compileComponents();
+                .overrideComponent(JhiHealthCheckComponent, {
+                    set: {
+                        template: ''
+                    }
+                })
+                .compileComponents();
         }));
 
         beforeEach(() => {

@@ -1,6 +1,6 @@
-import { Component, OnInit, AfterViewInit, Renderer, ElementRef } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, Renderer} from "@angular/core";
 
-import { PasswordResetInit } from './password-reset-init.service';
+import {PasswordResetInit} from "./password-reset-init.service";
 
 @Component({
     selector: 'jhi-password-reset-init',
@@ -12,12 +12,10 @@ export class PasswordResetInitComponent implements OnInit, AfterViewInit {
     resetAccount: any;
     success: string;
 
-    constructor(
-        private passwordResetInit: PasswordResetInit,
-        private elementRef: ElementRef,
-        private renderer: Renderer
-    ) {
-        }
+    constructor(private passwordResetInit: PasswordResetInit,
+                private elementRef: ElementRef,
+                private renderer: Renderer) {
+    }
 
     ngOnInit() {
         this.resetAccount = {};
@@ -27,7 +25,7 @@ export class PasswordResetInitComponent implements OnInit, AfterViewInit {
         this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#email'), 'focus', []);
     }
 
-    requestReset () {
+    requestReset() {
 
         this.error = null;
         this.errorEmailNotExists = null;

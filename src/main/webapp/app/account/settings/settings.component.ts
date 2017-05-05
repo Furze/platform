@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 
-import { Principal, AccountService } from '../../shared';
+import {AccountService, Principal} from "../../shared";
 
 @Component({
     selector: 'jhi-settings',
@@ -12,19 +12,17 @@ export class SettingsComponent implements OnInit {
     settingsAccount: any;
     languages: any[];
 
-    constructor(
-        private account: AccountService,
-        private principal: Principal
-    ) {
-        }
+    constructor(private account: AccountService,
+                private principal: Principal) {
+    }
 
-    ngOnInit () {
+    ngOnInit() {
         this.principal.identity().then((account) => {
             this.settingsAccount = this.copyAccount(account);
         });
     }
 
-    save () {
+    save() {
         this.account.save(this.settingsAccount).subscribe(() => {
             this.error = null;
             this.success = 'OK';
@@ -37,7 +35,7 @@ export class SettingsComponent implements OnInit {
         });
     }
 
-    copyAccount (account) {
+    copyAccount(account) {
         return {
             activated: account.activated,
             email: account.email,

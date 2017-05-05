@@ -1,8 +1,8 @@
 package nz.referable.config;
 
 
-import io.github.jhipster.security.*;
-
+import io.github.jhipster.security.AjaxLogoutSuccessHandler;
+import io.github.jhipster.security.Http401UnauthorizedEntryPoint;
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         try {
             authenticationManagerBuilder
                 .userDetailsService(userDetailsService)
-                    .passwordEncoder(passwordEncoder());
+                .passwordEncoder(passwordEncoder());
         } catch (Exception e) {
             throw new BeanInitializationException("Security configuration failed", e);
         }
@@ -84,13 +84,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
             .httpBasic().realmName("referable")
             .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
-                .requestMatchers().antMatchers("/oauth/authorize")
+            .requestMatchers().antMatchers("/oauth/authorize")
             .and()
-                .authorizeRequests()
-                .antMatchers("/oauth/authorize").authenticated();
+            .authorizeRequests()
+            .antMatchers("/oauth/authorize").authenticated();
     }
 
     @Override

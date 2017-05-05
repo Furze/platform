@@ -1,28 +1,27 @@
-import { Injectable, Inject } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
-import { LocalStorageService } from 'ng2-webstorage';
+import {Injectable} from "@angular/core";
+import {Headers, Http} from "@angular/http";
+import {Observable} from "rxjs/Rx";
+import {LocalStorageService} from "ng2-webstorage";
 
-import { Base64 } from 'ng-jhipster';
+import {Base64} from "ng-jhipster";
 
 @Injectable()
 export class AuthServerProvider {
 
-    constructor(
-        private http: Http,
-        private base64: Base64,
-        private $localStorage: LocalStorageService
-    ) {}
+    constructor(private http: Http,
+                private base64: Base64,
+                private $localStorage: LocalStorageService) {
+    }
 
-    getToken () {
+    getToken() {
         return this.$localStorage.retrieve('authenticationToken');
     }
 
-    login (credentials): Observable<any> {
-        let data = 'username=' +  encodeURIComponent(credentials.username) + '&password=' +
+    login(credentials): Observable<any> {
+        let data = 'username=' + encodeURIComponent(credentials.username) + '&password=' +
             encodeURIComponent(credentials.password) + '&grant_type=password&scope=read%20write&' +
             'client_secret=my-secret-token-to-change-in-production&client_id=referableapp';
-        let headers = new Headers ({
+        let headers = new Headers({
             'Content-Type': 'application/x-www-form-urlencoded',
             'Accept': 'application/json',
             'Authorization': 'Basic ' + this.base64.encode('referableapp' + ':' + 'my-secret-token-to-change-in-production')
@@ -32,7 +31,7 @@ export class AuthServerProvider {
             headers: headers
         }).map(authSuccess.bind(this));
 
-        function authSuccess (resp) {
+        function authSuccess(resp) {
             let response = resp.json();
             let expiredAt = new Date();
             expiredAt.setSeconds(expiredAt.getSeconds() + response.expires_in);
@@ -42,7 +41,7 @@ export class AuthServerProvider {
         }
     }
 
-    logout (): Observable<any> {
+    logout(): Observable<any> {
         return new Observable(observer => {
             this.http.post('api/logout', {});
             this.$localStorage.clear('authenticationToken');
