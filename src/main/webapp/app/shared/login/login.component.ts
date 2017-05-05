@@ -1,10 +1,10 @@
-import {AfterViewInit, Component, ElementRef, OnInit, Renderer} from "@angular/core";
-import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {Router} from "@angular/router";
-import {EventManager} from "ng-jhipster";
+import { Component, OnInit, AfterViewInit, Renderer, ElementRef } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
+import { EventManager } from 'ng-jhipster';
 
-import {LoginService} from "../login/login.service";
-import {StateStorageService} from "../auth/state-storage.service";
+import { LoginService } from './login.service';
+import { StateStorageService } from '../auth/state-storage.service';
 
 @Component({
     selector: 'jhi-login-modal',
@@ -17,13 +17,15 @@ export class JhiLoginModalComponent implements OnInit, AfterViewInit {
     username: string;
     credentials: any;
 
-    constructor(private eventManager: EventManager,
-                private loginService: LoginService,
-                private stateStorageService: StateStorageService,
-                private elementRef: ElementRef,
-                private renderer: Renderer,
-                private router: Router,
-                public activeModal: NgbActiveModal) {
+    constructor(
+        private eventManager: EventManager,
+        private loginService: LoginService,
+        private stateStorageService: StateStorageService,
+        private elementRef: ElementRef,
+        private renderer: Renderer,
+        private router: Router,
+        public activeModal: NgbActiveModal
+    ) {
         this.credentials = {};
     }
 
@@ -64,7 +66,7 @@ export class JhiLoginModalComponent implements OnInit, AfterViewInit {
 
             // // previousState was set in the authExpiredInterceptor before being redirected to login modal.
             // // since login is succesful, go to stored previousState and clear previousState
-            let redirect = this.stateStorageService.getUrl();
+            const redirect = this.stateStorageService.getUrl();
             if (redirect) {
                 this.router.navigate([redirect]);
             }

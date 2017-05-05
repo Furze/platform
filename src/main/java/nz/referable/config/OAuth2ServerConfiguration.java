@@ -1,14 +1,17 @@
 package nz.referable.config;
 
-import io.github.jhipster.security.AjaxLogoutSuccessHandler;
-import io.github.jhipster.security.Http401UnauthorizedEntryPoint;
 import nz.referable.security.AuthoritiesConstants;
+
+import io.github.jhipster.security.Http401UnauthorizedEntryPoint;
+import io.github.jhipster.security.AjaxLogoutSuccessHandler;
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -55,7 +58,7 @@ public class OAuth2ServerConfiguration {
         private final CorsFilter corsFilter;
 
         public ResourceServerConfiguration(TokenStore tokenStore, Http401UnauthorizedEntryPoint http401UnauthorizedEntryPoint,
-                                           AjaxLogoutSuccessHandler ajaxLogoutSuccessHandler, CorsFilter corsFilter) {
+            AjaxLogoutSuccessHandler ajaxLogoutSuccessHandler, CorsFilter corsFilter) {
 
             this.tokenStore = tokenStore;
             this.http401UnauthorizedEntryPoint = http401UnauthorizedEntryPoint;
@@ -68,17 +71,17 @@ public class OAuth2ServerConfiguration {
             http
                 .exceptionHandling()
                 .authenticationEntryPoint(http401UnauthorizedEntryPoint)
-                .and()
+            .and()
                 .logout()
                 .logoutUrl("/api/logout")
                 .logoutSuccessHandler(ajaxLogoutSuccessHandler)
-                .and()
+            .and()
                 .csrf()
                 .disable()
                 .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
                 .headers()
                 .frameOptions().disable()
-                .and()
+            .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers("/api/authenticate").permitAll()
@@ -110,7 +113,7 @@ public class OAuth2ServerConfiguration {
         private final DataSource dataSource;
 
         public AuthorizationServerConfiguration(@Qualifier("authenticationManagerBean") AuthenticationManager authenticationManager,
-                                                TokenStore tokenStore, DataSource dataSource) {
+                TokenStore tokenStore, DataSource dataSource) {
 
             this.authenticationManager = authenticationManager;
             this.tokenStore = tokenStore;
@@ -129,7 +132,7 @@ public class OAuth2ServerConfiguration {
 
         @Override
         public void configure(AuthorizationServerEndpointsConfigurer endpoints)
-            throws Exception {
+                throws Exception {
             endpoints
                 .authorizationCodeServices(authorizationCodeServices())
                 .approvalStore(approvalStore())

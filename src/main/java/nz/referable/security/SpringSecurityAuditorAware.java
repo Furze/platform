@@ -1,6 +1,7 @@
 package nz.referable.security;
 
 import nz.referable.config.Constants;
+
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;
 

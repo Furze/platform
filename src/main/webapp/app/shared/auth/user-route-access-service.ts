@@ -1,9 +1,10 @@
-import {Injectable} from "@angular/core";
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from "@angular/router";
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 
-import {Principal} from "../";
-import {LoginModalService} from "../login/login-modal.service";
-import {StateStorageService} from "./state-storage.service";
+import { AuthService } from '../';
+import { Principal } from '../';
+import { LoginModalService } from '../login/login-modal.service';
+import { StateStorageService } from './state-storage.service';
 
 @Injectable()
 export class UserRouteAccessService implements CanActivate {
@@ -15,20 +16,28 @@ export class UserRouteAccessService implements CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Promise<boolean> {
-        return this.checkLogin(route.data['authorities'], state.url);
+
+        const authorities = route.data['authorities'];
+        if (!authorities || authorities.length === 0) {
+            return true;
+        }
+
+        return this.checkLogin(authorities, state.url);
     }
 
     checkLogin(authorities: string[], url: string): Promise<boolean> {
-        return Promise.resolve(this.principal.hasAnyAuthority(authorities).then(isOk => {
-            if (isOk) {
+        const principal = this.principal;
+        return Promise.resolve(principal.identity().then((account) => {
+
+            if (account && principal.hasAnyAuthority(authorities)) {
                 return true;
-            } else {
-                this.stateStorageService.storeUrl(url);
-                this.router.navigate(['accessdenied']).then(() => {
-                    this.loginModalService.open();
-                });
-                return false;
             }
+
+            this.stateStorageService.storeUrl(url);
+            this.router.navigate(['accessdenied']).then(() => {
+                this.loginModalService.open();
+            });
+            return false;
         }));
     }
 }

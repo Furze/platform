@@ -1,5 +1,5 @@
-import {SpyObject} from "./spyobject";
-import {JhiTrackerService} from "../../../../main/webapp/app/shared/tracker/tracker.service";
+import { SpyObject } from './spyobject';
+import { JhiTrackerService } from '../../../../main/webapp/app/shared/tracker/tracker.service';
 
 export class MockTrackerService extends SpyObject {
 
@@ -7,6 +7,5 @@ export class MockTrackerService extends SpyObject {
         super(JhiTrackerService);
     }
 
-    connect() {
-    }
+    connect () {}
 }

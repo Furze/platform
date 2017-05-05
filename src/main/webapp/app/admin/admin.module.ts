@@ -1,41 +1,40 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from "@angular/core";
-import {RouterModule} from "@angular/router";
-import {JhiTrackerService} from "./../shared/tracker/tracker.service";
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { JhiTrackerService } from './../shared/tracker/tracker.service';
 
-import {ReferableSharedModule} from "../shared";
+import { ReferableSharedModule } from '../shared';
 
 import {
     adminState,
     AuditsComponent,
-    AuditsService,
-    JhiConfigurationComponent,
-    JhiConfigurationService,
-    JhiDocsComponent,
-    JhiHealthCheckComponent,
-    JhiHealthModalComponent,
-    JhiHealthService,
-    JhiMetricsMonitoringComponent,
-    JhiMetricsMonitoringModalComponent,
-    JhiMetricsService,
-    JhiTrackerComponent,
-    LogsComponent,
-    LogsService,
-    UserDeleteDialogComponent,
-    UserDialogComponent,
     UserMgmtComponent,
-    UserMgmtDeleteDialogComponent,
+    UserDialogComponent,
+    UserDeleteDialogComponent,
     UserMgmtDetailComponent,
     UserMgmtDialogComponent,
-    UserModalService,
+    UserMgmtDeleteDialogComponent,
+    LogsComponent,
+    JhiMetricsMonitoringModalComponent,
+    JhiMetricsMonitoringComponent,
+    JhiHealthModalComponent,
+    JhiHealthCheckComponent,
+    JhiConfigurationComponent,
+    JhiDocsComponent,
+    AuditsService,
+    JhiConfigurationService,
+    JhiHealthService,
+    JhiMetricsService,
+    JhiTrackerComponent,
+    LogsService,
+    UserResolvePagingParams,
     UserResolve,
-    UserResolvePagingParams
-} from "./";
-
+    UserModalService
+} from './';
 
 @NgModule({
     imports: [
         ReferableSharedModule,
-        RouterModule.forRoot(adminState, {useHash: true})
+        RouterModule.forRoot(adminState, { useHash: true })
     ],
     declarations: [
         AuditsComponent,
@@ -73,5 +72,4 @@ import {
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ReferableAdminModule {
-}
+export class ReferableAdminModule {}

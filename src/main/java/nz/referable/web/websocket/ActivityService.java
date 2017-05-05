@@ -13,11 +13,12 @@ import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
-import java.security.Principal;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.security.Principal;
 import java.util.Calendar;
 
 import static nz.referable.config.WebsocketConfiguration.IP_ADDRESS;
@@ -26,8 +27,10 @@ import static nz.referable.config.WebsocketConfiguration.IP_ADDRESS;
 public class ActivityService implements ApplicationListener<SessionDisconnectEvent> {
 
     private static final Logger log = LoggerFactory.getLogger(ActivityService.class);
-    private final SimpMessageSendingOperations messagingTemplate;
+
     private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    private final SimpMessageSendingOperations messagingTemplate;
 
     public ActivityService(SimpMessageSendingOperations messagingTemplate) {
         this.messagingTemplate = messagingTemplate;

@@ -1,5 +1,7 @@
 package nz.referable.config;
 
+import io.github.jhipster.config.JHipsterProperties;
+
 import com.codahale.metrics.JmxReporter;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Slf4jReporter;
@@ -9,12 +11,10 @@ import com.codahale.metrics.jvm.*;
 import com.ryantenney.metrics.spring.config.annotation.EnableMetrics;
 import com.ryantenney.metrics.spring.config.annotation.MetricsConfigurerAdapter;
 import com.zaxxer.hikari.HikariDataSource;
-import io.github.jhipster.config.JHipsterProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.lang.management.ManagementFactory;
@@ -32,9 +32,13 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter {
 
     private static final String PROP_METRIC_REG_JCACHE_STATISTICS = "jcache.statistics";
     private final Logger log = LoggerFactory.getLogger(MetricsConfiguration.class);
-    private final JHipsterProperties jHipsterProperties;
+
     private MetricRegistry metricRegistry = new MetricRegistry();
+
     private HealthCheckRegistry healthCheckRegistry = new HealthCheckRegistry();
+
+    private final JHipsterProperties jHipsterProperties;
+
     private HikariDataSource hikariDataSource;
 
     public MetricsConfiguration(JHipsterProperties jHipsterProperties) {

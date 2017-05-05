@@ -1,5 +1,5 @@
-import {Directive, Input, TemplateRef, ViewContainerRef} from "@angular/core";
-import {Principal} from "./principal.service";
+import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Principal } from './principal.service';
 
 /**
  * @whatItDoes Conditionally includes an HTML element if current user has any
@@ -23,15 +23,15 @@ export class HasAnyAuthorityDirective {
     }
 
     @Input()
-    set jhiHasAnyAuthority(value: string | string[]) {
-        this.authorities = typeof value === 'string' ? [<string> value] : <string[]> value;
+    set jhiHasAnyAuthority(value: string|string[]) {
+        this.authorities = typeof value === 'string' ? [ <string> value ] : <string[]> value;
         this.updateView();
         // Get notified each time authentication state changes.
-        this.principal.getAuthenticationState().subscribe(identity => this.updateView());
+        this.principal.getAuthenticationState().subscribe((identity) => this.updateView());
     }
 
     private updateView(): void {
-        this.principal.hasAnyAuthority(this.authorities).then(result => {
+        this.principal.hasAnyAuthority(this.authorities).then((result) => {
             this.viewContainerRef.clear();
             if (result) {
                 this.viewContainerRef.createEmbeddedView(this.templateRef);

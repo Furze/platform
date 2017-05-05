@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import {JhiTrackerService} from "../../shared";
+import { JhiTrackerService } from '../../shared';
 
 @Component({
     selector: 'jhi-tracker',
@@ -10,15 +10,17 @@ export class JhiTrackerComponent implements OnInit, OnDestroy {
 
     activities: any[] = [];
 
-    constructor(private trackerService: JhiTrackerService) {
-    }
+    constructor(
+        private trackerService: JhiTrackerService
+    ) {
+        }
 
     showActivity(activity: any) {
         let existingActivity = false;
         for (let index = 0; index < this.activities.length; index++) {
             if (this.activities[index].sessionId === activity.sessionId) {
                 existingActivity = true;
-                if (activity.page === 'logout') {
+                if ( activity.page === 'logout' ) {
                     this.activities.splice(index, 1);
                 } else {
                     this.activities[index] = activity;
@@ -32,7 +34,7 @@ export class JhiTrackerComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.trackerService.subscribe();
-        this.trackerService.receive().subscribe(activity => {
+        this.trackerService.receive().subscribe((activity) => {
             this.showActivity(activity);
         });
     }
@@ -40,5 +42,4 @@ export class JhiTrackerComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.trackerService.unsubscribe();
     }
-
 }

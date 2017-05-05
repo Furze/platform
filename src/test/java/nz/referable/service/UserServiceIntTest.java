@@ -1,23 +1,25 @@
 package nz.referable.service;
 
 import nz.referable.ReferableApp;
-import nz.referable.config.Constants;
 import nz.referable.domain.User;
+import nz.referable.config.Constants;
 import nz.referable.repository.UserRepository;
 import nz.referable.service.dto.UserDTO;
+import java.time.ZonedDateTime;
 import nz.referable.service.util.RandomUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.test.context.junit4.SpringRunner;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.Optional;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.*;
 
 /**
  * Test class for the UserResource REST controller.

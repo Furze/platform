@@ -1,28 +1,28 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from "@angular/core";
-import {RouterModule} from "@angular/router";
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
-import {ReferableSharedModule} from "../shared";
+import { ReferableSharedModule } from '../shared';
 
 import {
-    accountState,
-    Activate,
-    ActivateComponent,
-    Password,
-    PasswordComponent,
-    PasswordResetFinish,
-    PasswordResetFinishComponent,
-    PasswordResetInit,
-    PasswordResetInitComponent,
-    PasswordStrengthBarComponent,
     Register,
+    Activate,
+    Password,
+    PasswordResetInit,
+    PasswordResetFinish,
+    PasswordStrengthBarComponent,
     RegisterComponent,
-    SettingsComponent
-} from "./";
+    ActivateComponent,
+    PasswordComponent,
+    PasswordResetInitComponent,
+    PasswordResetFinishComponent,
+    SettingsComponent,
+    accountState
+} from './';
 
 @NgModule({
     imports: [
         ReferableSharedModule,
-        RouterModule.forRoot(accountState, {useHash: true})
+        RouterModule.forRoot(accountState, { useHash: true })
     ],
     declarations: [
         ActivateComponent,
@@ -42,5 +42,4 @@ import {
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ReferableAccountModule {
-}
+export class ReferableAccountModule {}

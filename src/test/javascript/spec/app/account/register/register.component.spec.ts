@@ -1,10 +1,10 @@
-import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from "@angular/core/testing";
-import {ElementRef, Renderer} from "@angular/core";
-import {Observable} from "rxjs/Rx";
-import {ReferableTestModule} from "../../../test.module";
-import {LoginModalService} from "../../../../../../main/webapp/app/shared";
-import {Register} from "../../../../../../main/webapp/app/account/register/register.service";
-import {RegisterComponent} from "../../../../../../main/webapp/app/account/register/register.component";
+import { ComponentFixture, TestBed, async, inject, tick, fakeAsync } from '@angular/core/testing';
+import { Renderer, ElementRef } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+import { ReferableTestModule } from '../../../test.module';
+import { LoginModalService } from '../../../../../../main/webapp/app/shared';
+import { Register } from '../../../../../../main/webapp/app/account/register/register.service';
+import { RegisterComponent } from '../../../../../../main/webapp/app/account/register/register.component';
 
 
 describe('Component Tests', () => {
@@ -69,7 +69,7 @@ describe('Component Tests', () => {
                     });
                     expect(comp.success).toEqual(true);
                     expect(comp.registerAccount.langKey).toEqual('en');
-
+                    
                     expect(comp.errorUserExists).toBeNull();
                     expect(comp.errorEmailExists).toBeNull();
                     expect(comp.error).toBeNull();

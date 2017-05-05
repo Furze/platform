@@ -1,6 +1,7 @@
 package nz.referable.repository;
 
 import nz.referable.domain.Authority;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

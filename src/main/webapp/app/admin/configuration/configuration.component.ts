@@ -1,6 +1,6 @@
-import {Component, OnInit} from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 
-import {JhiConfigurationService} from "./configuration.service";
+import { JhiConfigurationService } from './configuration.service';
 
 @Component({
     selector: 'jhi-configuration',
@@ -14,7 +14,9 @@ export class JhiConfigurationComponent implements OnInit {
     orderProp: string;
     reverse: boolean;
 
-    constructor(private configurationService: JhiConfigurationService) {
+    constructor(
+        private configurationService: JhiConfigurationService
+    ) {
         this.configKeys = [];
         this.filter = '';
         this.orderProp = 'prefix';
@@ -29,7 +31,7 @@ export class JhiConfigurationComponent implements OnInit {
         this.configurationService.get().subscribe((configuration) => {
             this.configuration = configuration;
 
-            for (let config of configuration) {
+            for (const config of configuration) {
                 if (config.properties !== undefined) {
                     this.configKeys.push(Object.keys(config.properties));
                 }

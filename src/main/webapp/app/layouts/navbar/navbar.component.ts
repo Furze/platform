@@ -1,11 +1,11 @@
-import {Component, OnInit} from "@angular/core";
-import {Router} from "@angular/router";
-import {NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
-import {ProfileService} from "../profiles/profile.service"; // FIXME barrel doesn't work here
-import {LoginModalService, LoginService, Principal} from "../../shared";
+import { ProfileService } from '../profiles/profile.service'; // FIXME barrel doesn't work here
+import { Principal, LoginModalService, LoginService } from '../../shared';
 
-import {DEBUG_INFO_ENABLED, VERSION} from "../../app.constants";
+import { VERSION, DEBUG_INFO_ENABLED } from '../../app.constants';
 
 @Component({
     selector: 'jhi-navbar',
@@ -23,18 +23,20 @@ export class NavbarComponent implements OnInit {
     modalRef: NgbModalRef;
     version: string;
 
-    constructor(private loginService: LoginService,
-                private principal: Principal,
-                private loginModalService: LoginModalService,
-                private profileService: ProfileService,
-                private router: Router) {
+    constructor(
+        private loginService: LoginService,
+        private principal: Principal,
+        private loginModalService: LoginModalService,
+        private profileService: ProfileService,
+        private router: Router
+    ) {
         this.version = DEBUG_INFO_ENABLED ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
     }
 
     ngOnInit() {
 
-        this.profileService.getProfileInfo().subscribe(profileInfo => {
+        this.profileService.getProfileInfo().subscribe((profileInfo) => {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });

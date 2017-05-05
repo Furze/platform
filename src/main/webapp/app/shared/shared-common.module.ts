@@ -1,16 +1,16 @@
-import {NgModule, Sanitizer} from "@angular/core";
-import {Title} from "@angular/platform-browser";
-
-import {AlertService} from "ng-jhipster";
-
-import {WindowRef} from "./tracker/window.service";
-
-import {JhiAlertComponent, JhiAlertErrorComponent, ReferableSharedLibsModule} from "./";
-
+import { NgModule, Sanitizer } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { AlertService } from 'ng-jhipster';
+import { WindowRef } from './tracker/window.service';
+import {
+    ReferableSharedLibsModule,
+    JhiAlertComponent,
+    JhiAlertErrorComponent
+} from './';
 
 export function alertServiceProvider(sanitizer: Sanitizer) {
     // set below to true to make alerts look like toast
-    let isToast = false;
+    const isToast = false;
     return new AlertService(sanitizer, isToast);
 }
 
@@ -37,5 +37,4 @@ export function alertServiceProvider(sanitizer: Sanitizer) {
         JhiAlertErrorComponent
     ]
 })
-export class ReferableSharedCommonModule {
-}
+export class ReferableSharedCommonModule {}

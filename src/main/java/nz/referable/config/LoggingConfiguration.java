@@ -1,11 +1,12 @@
 package nz.referable.config;
 
+import io.github.jhipster.config.JHipsterProperties;
+
 import ch.qos.logback.classic.AsyncAppender;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.spi.LoggerContextListener;
 import ch.qos.logback.core.spi.ContextAwareBase;
-import io.github.jhipster.config.JHipsterProperties;
 import net.logstash.logback.appender.LogstashSocketAppender;
 import net.logstash.logback.stacktrace.ShortenedThrowableConverter;
 import org.slf4j.Logger;
@@ -17,13 +18,17 @@ import org.springframework.context.annotation.Configuration;
 public class LoggingConfiguration {
 
     private final Logger log = LoggerFactory.getLogger(LoggingConfiguration.class);
-    private final String appName;
-    private final String serverPort;
-    private final JHipsterProperties jHipsterProperties;
+
     private LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
 
+    private final String appName;
+
+    private final String serverPort;
+
+    private final JHipsterProperties jHipsterProperties;
+
     public LoggingConfiguration(@Value("${spring.application.name}") String appName, @Value("${server.port}") String serverPort,
-                                JHipsterProperties jHipsterProperties) {
+         JHipsterProperties jHipsterProperties) {
         this.appName = appName;
         this.serverPort = serverPort;
         this.jHipsterProperties = jHipsterProperties;

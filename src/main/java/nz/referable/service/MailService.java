@@ -1,7 +1,9 @@
 package nz.referable.service;
 
-import io.github.jhipster.config.JHipsterProperties;
 import nz.referable.domain.User;
+
+import io.github.jhipster.config.JHipsterProperties;
+
 import org.apache.commons.lang3.CharEncoding;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,9 +27,12 @@ import java.util.Locale;
 @Service
 public class MailService {
 
-    private static final String USER = "user";
-    private static final String BASE_URL = "baseUrl";
     private final Logger log = LoggerFactory.getLogger(MailService.class);
+
+    private static final String USER = "user";
+
+    private static final String BASE_URL = "baseUrl";
+
     private final JHipsterProperties jHipsterProperties;
 
     private final JavaMailSender javaMailSender;
@@ -37,7 +42,7 @@ public class MailService {
     private final SpringTemplateEngine templateEngine;
 
     public MailService(JHipsterProperties jHipsterProperties, JavaMailSender javaMailSender,
-                       MessageSource messageSource, SpringTemplateEngine templateEngine) {
+            MessageSource messageSource, SpringTemplateEngine templateEngine) {
 
         this.jHipsterProperties = jHipsterProperties;
         this.javaMailSender = javaMailSender;

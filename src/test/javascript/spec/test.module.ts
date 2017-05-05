@@ -1,6 +1,6 @@
-import {NgModule} from "@angular/core";
-import {MockBackend} from "@angular/http/testing";
-import {BaseRequestOptions, Http} from "@angular/http";
+import { NgModule } from '@angular/core';
+import { MockBackend } from '@angular/http/testing';
+import { Http, BaseRequestOptions } from '@angular/http';
 
 @NgModule({
     providers: [
@@ -15,5 +15,4 @@ import {BaseRequestOptions, Http} from "@angular/http";
         }
     ]
 })
-export class ReferableTestModule {
-}
+export class ReferableTestModule {}

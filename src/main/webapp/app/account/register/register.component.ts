@@ -1,8 +1,8 @@
-import {AfterViewInit, Component, ElementRef, OnInit, Renderer} from "@angular/core";
-import {NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
+import { Component, OnInit, AfterViewInit, Renderer, ElementRef } from '@angular/core';
+import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
-import {Register} from "./register.service";
-import {LoginModalService} from "../../shared";
+import { Register } from './register.service';
+import { LoginModalService } from '../../shared';
 
 @Component({
     selector: 'jhi-register',
@@ -19,11 +19,13 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     success: boolean;
     modalRef: NgbModalRef;
 
-    constructor(private loginModalService: LoginModalService,
-                private registerService: Register,
-                private elementRef: ElementRef,
-                private renderer: Renderer) {
-    }
+    constructor(
+        private loginModalService: LoginModalService,
+        private registerService: Register,
+        private elementRef: ElementRef,
+        private renderer: Renderer
+    ) {
+        }
 
     ngOnInit() {
         this.success = false;

@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
-import {Observable} from "rxjs/Observable";
-import {Subject} from "rxjs/Subject";
-import {AccountService} from "./account.service";
-import {JhiTrackerService} from "../tracker/tracker.service"; // Barrel doesn't work here. No idea why!
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import { AccountService } from './account.service';
+import { JhiTrackerService } from '../tracker/tracker.service'; // Barrel doesn't work here. No idea why!
 
 @Injectable()
 export class Principal {
@@ -10,9 +10,10 @@ export class Principal {
     private authenticated = false;
     private authenticationState = new Subject<any>();
 
-    constructor(private account: AccountService,
-                private trackerService: JhiTrackerService) {
-    }
+    constructor(
+        private account: AccountService,
+        private trackerService: JhiTrackerService
+    ) {}
 
     authenticate(identity) {
         this.userIdentity = identity;
@@ -36,10 +37,10 @@ export class Principal {
 
     hasAuthority(authority: string): Promise<boolean> {
         if (!this.authenticated) {
-            return Promise.resolve(false);
+           return Promise.resolve(false);
         }
 
-        return this.identity().then(id => {
+        return this.identity().then((id) => {
             return Promise.resolve(id.authorities && id.authorities.indexOf(authority) !== -1);
         }, () => {
             return Promise.resolve(false);
@@ -58,7 +59,7 @@ export class Principal {
         }
 
         // retrieve the userIdentity data from the server, update the identity object, and then resolve.
-        return this.account.get().toPromise().then(account => {
+        return this.account.get().toPromise().then((account) => {
             if (account) {
                 this.userIdentity = account;
                 this.authenticated = true;
@@ -69,7 +70,7 @@ export class Principal {
             }
             this.authenticationState.next(this.userIdentity);
             return this.userIdentity;
-        }).catch(err => {
+        }).catch((err) => {
             if (this.trackerService.stompClient && this.trackerService.stompClient.connected) {
                 this.trackerService.disconnect();
             }

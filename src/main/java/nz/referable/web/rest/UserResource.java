@@ -1,9 +1,7 @@
 package nz.referable.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import io.github.jhipster.web.util.ResponseUtil;
-import io.swagger.annotations.ApiParam;
 import nz.referable.config.Constants;
+import com.codahale.metrics.annotation.Timed;
 import nz.referable.domain.User;
 import nz.referable.repository.UserRepository;
 import nz.referable.repository.search.UserSearchRepository;
@@ -11,9 +9,12 @@ import nz.referable.security.AuthoritiesConstants;
 import nz.referable.service.MailService;
 import nz.referable.service.UserService;
 import nz.referable.service.dto.UserDTO;
+import nz.referable.web.rest.vm.ManagedUserVM;
 import nz.referable.web.rest.util.HeaderUtil;
 import nz.referable.web.rest.util.PaginationUtil;
-import nz.referable.web.rest.vm.ManagedUserVM;
+import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.ApiParam;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -30,11 +31,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing users.
- * <p>
+ *
  * <p>This class accesses the User entity, and needs to fetch its collection of authorities.</p>
  * <p>
  * For a normal use-case, it would be better to have an eager relationship between User and Authority,
@@ -60,8 +61,10 @@ import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 @RequestMapping("/api")
 public class UserResource {
 
-    private static final String ENTITY_NAME = "userManagement";
     private final Logger log = LoggerFactory.getLogger(UserResource.class);
+
+    private static final String ENTITY_NAME = "userManagement";
+
     private final UserRepository userRepository;
 
     private final MailService mailService;
@@ -71,7 +74,7 @@ public class UserResource {
     private final UserSearchRepository userSearchRepository;
 
     public UserResource(UserRepository userRepository, MailService mailService,
-                        UserService userService, UserSearchRepository userSearchRepository) {
+            UserService userService, UserSearchRepository userSearchRepository) {
 
         this.userRepository = userRepository;
         this.mailService = mailService;
@@ -101,7 +104,7 @@ public class UserResource {
             return ResponseEntity.badRequest()
                 .headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new user cannot already have an ID"))
                 .body(null);
-            // Lowercase the user login before comparing with database
+        // Lowercase the user login before comparing with database
         } else if (userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase()).isPresent()) {
             return ResponseEntity.badRequest()
                 .headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "userexists", "Login already in use"))
@@ -114,7 +117,7 @@ public class UserResource {
             User newUser = userService.createUser(managedUserVM);
             mailService.sendCreationEmail(newUser);
             return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
-                .headers(HeaderUtil.createAlert("A user is created with identifier " + newUser.getLogin(), newUser.getLogin()))
+                .headers(HeaderUtil.createAlert( "A user is created with identifier " + newUser.getLogin(), newUser.getLogin()))
                 .body(newUser);
         }
     }
@@ -187,7 +190,7 @@ public class UserResource {
     public ResponseEntity<Void> deleteUser(@PathVariable String login) {
         log.debug("REST request to delete User: {}", login);
         userService.deleteUser(login);
-        return ResponseEntity.ok().headers(HeaderUtil.createAlert("A user is deleted with identifier " + login, login)).build();
+        return ResponseEntity.ok().headers(HeaderUtil.createAlert( "A user is deleted with identifier " + login, login)).build();
     }
 
     /**
